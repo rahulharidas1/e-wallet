@@ -15,10 +15,14 @@ public class UserCacheRepository {
     private static final String USER_KEY_PREFIX = "usr::";
 
     public User getUser(String userId){
-        return (User)redisTemplate.opsForValue().get(USER_KEY_PREFIX + userId);
+        return (User)redisTemplate.opsForValue().get(getKey(userId));
     }
 
     public void addUser(User user) {
-        redisTemplate.opsForValue().set(USER_KEY_PREFIX + user.getUserId(), user, Duration.ofMinutes(10));
+        redisTemplate.opsForValue().set(getKey(user.getUserId()), user, Duration.ofMinutes(10));
+    }
+
+    private String getKey(String userId) {
+        return USER_KEY_PREFIX + userId;
     }
 }
