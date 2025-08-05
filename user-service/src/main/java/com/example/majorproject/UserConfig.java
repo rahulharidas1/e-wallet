@@ -1,5 +1,6 @@
 package com.example.majorproject;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.apache.kafka.clients.producer.ProducerConfig;
 import org.apache.kafka.common.serialization.StringSerializer;
 import org.springframework.context.annotation.Bean;
@@ -64,5 +65,10 @@ public class UserConfig {
     @Bean
     KafkaTemplate<String, String> getKafkaTemplate() {
         return new KafkaTemplate<>(getKafkaProducerFactory());
+    }
+
+    @Bean
+    ObjectMapper getObjectMapper() {
+        return new ObjectMapper();
     }
 }
