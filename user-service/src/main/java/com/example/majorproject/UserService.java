@@ -29,7 +29,7 @@ public class UserService {
     public User getUser(String userId) {
         User user = userCacheRepository.getUser(userId);
         if (user == null) {
-            user = userRepository.findById(userId);
+            user = userRepository.findByUserId(userId);
             userCacheRepository.addUser(user);
         }
         return user;
