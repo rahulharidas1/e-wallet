@@ -53,12 +53,16 @@ public class WalletService {
         Wallet fromWallet = walletRepository.findByUserId(fromUser);
 
         transactionUpdateRequest.put("transactionId", transactionId);
+        transactionUpdateRequest.put("fromUser", fromUser);
+        transactionUpdateRequest.put("toUser", toUser);
+
         if (fromWallet == null || fromWallet.getAmount() - amount < 0) {
             transactionUpdateRequest.put("status", "FAILED");
         } else {
             walletRepository.updateWallet(fromUser, 0 - amount);
             walletRepository.updateWallet(toUser, amount);
 
+            transactionUpdateRequest.put("amount", amount);
             transactionUpdateRequest.put("status", "SUCCESS");
         }
 
