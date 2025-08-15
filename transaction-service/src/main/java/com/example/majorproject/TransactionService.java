@@ -80,7 +80,7 @@ public class TransactionService {
         // publish the event
         JSONObject transactionCompleteEvent = new JSONObject();
         transactionCompleteEvent.put("email", fromUserDetails.get("email"));
-        transactionCompleteEvent.put("message", "Hey " + fromUser + "!, your transaction with ID: " + transactionId + "got " + transactionStatus);
+        transactionCompleteEvent.put("message", "Hey " + fromUser + "!, your transaction with ID: " + transactionId + " got " + transactionStatus);
 
         kafkaTemplate.send(TOPIC_TRANSACTION_COMPLETE, objectMapper.writeValueAsString(transactionCompleteEvent));
 
@@ -96,7 +96,7 @@ public class TransactionService {
 
             transactionCompleteEvent = new JSONObject();
             transactionCompleteEvent.put("email", toUserDetails.get("email"));
-            transactionCompleteEvent.put("message", "Hey " + toUser + "!, you have received amount: " + amount + "from " + fromUser + "Transaction ID: " + transactionId);
+            transactionCompleteEvent.put("message", "Hey " + toUser + "!, you have received amount: " + amount + " from " + fromUser + " Transaction ID: " + transactionId);
 
             kafkaTemplate.send(TOPIC_TRANSACTION_COMPLETE, objectMapper.writeValueAsString(transactionCompleteEvent));
         }
