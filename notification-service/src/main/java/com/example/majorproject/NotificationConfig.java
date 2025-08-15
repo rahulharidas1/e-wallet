@@ -16,6 +16,8 @@ import java.util.Properties;
 @Configuration
 public class NotificationConfig {
 
+    private static final String SYS_ENV_EMAIL_PASSWORD = "EMAIL_PASSWORD";
+
     @Bean
     Properties getKafkaProps() {
         Properties properties = new Properties();
@@ -50,8 +52,8 @@ public class NotificationConfig {
         JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
         javaMailSender.setHost("smtp.gmail.com");
         javaMailSender.setPort(587);
-        javaMailSender.setUsername("ewallet.majorproject");
-        javaMailSender.setPassword("dummypass");
+        javaMailSender.setUsername("noreply.ewalletapp@gmail.com");
+        javaMailSender.setPassword(System.getenv(SYS_ENV_EMAIL_PASSWORD));
 
         Properties properties = javaMailSender.getJavaMailProperties();
         properties.put("mail.debug", true);
