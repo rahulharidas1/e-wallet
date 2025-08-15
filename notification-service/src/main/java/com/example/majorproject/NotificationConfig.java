@@ -8,6 +8,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
+import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
 
@@ -60,5 +61,10 @@ public class NotificationConfig {
         properties.put("mail.smtp.starttls.enable", true);
 
         return javaMailSender;
+    }
+
+    @Bean
+    SimpleMailMessage getMail() {
+        return new SimpleMailMessage();
     }
 }
